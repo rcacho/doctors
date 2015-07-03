@@ -15,9 +15,9 @@
 
 @property NSMutableArray* globalPrescritptionList;
 
-@property PrescriptionRecord* global_record;
-
 -(instancetype) init;
+
+-(instancetype) getRecord;
 
 -(void) addPrescription: (Prescription *)aPrescription;
 

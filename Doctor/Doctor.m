@@ -15,7 +15,7 @@
     if (self) {
         self.name = some_name;
         self.patientList = [[NSMutableArray alloc] init];
-        self.record = [[PrescriptionRecord alloc] init];
+        self.record = [[PrescriptionRecord alloc] getRecord];
     }
     return self;
 }

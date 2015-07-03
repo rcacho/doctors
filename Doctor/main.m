@@ -37,7 +37,7 @@ int main(int argc, const char * argv[]) {
         // have homer ask for medication
         [homer requestMedication:nick];
         
-        PrescriptionRecord *record = [nick record];
+        PrescriptionRecord *record = [hibbert record];
         NSMutableArray *prescriptionlist = [record globalPrescritptionList];
         for (Prescription *prescription in prescriptionlist) {
             Patient *patient = [prescription prescriber];
