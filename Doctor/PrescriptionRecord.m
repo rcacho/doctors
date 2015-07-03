@@ -13,9 +13,13 @@
 static PrescriptionRecord *global_record = nil;
 
 -(instancetype) init {
-    if (global_record) {
+    if (!global_record) {
         self = [super init];
-        self.global_record = self;
+        if (self) {
+            self.global_record = self;
+            self.globalPrescritptionList = [[NSMutableArray alloc] init];
+        }
+
     }
     return self;
 }

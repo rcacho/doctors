@@ -19,8 +19,10 @@ int main(int argc, const char * argv[]) {
         Doctor *hibbert = [[Doctor alloc] init:@"hibbert"];
         
         
-        Patient *homer = [[Patient alloc] init:@"homer" card:YES condition:paranoia];
-        Patient *bart = [[Patient alloc] init:@"bart" card:NO condition:depression];
+        Patient *homer = [[Patient alloc] init:@"homer" condition:paranoia];
+        [homer validate];
+        Patient *bart = [[Patient alloc] init:@"bart" condition:depression];
+        [bart inValidate];
         
         // have patient ask doctor
         [homer askForName:hibbert];
@@ -28,8 +30,21 @@ int main(int argc, const char * argv[]) {
         [nick askForName:bart];
         
         [homer visitDoctor:nick];
+        [bart visitDoctor:nick];
+        // homer should have been added to his list, bart should not have been
+        [nick printPatientList];
         
-        NSLog(@"%@",[nick patientList]);
+        // have homer ask for medication
+        [homer requestMedication:nick];
+        
+        PrescriptionRecord *record = [nick record];
+        NSMutableArray *prescriptionlist = [record globalPrescritptionList];
+        for (Prescription *prescription in prescriptionlist) {
+            Patient *patient = [prescription prescriber];
+            NSString *name = [patient name];
+            NSLog(@"The name of one of the people in the record is: %@", name);
+        }
+        
         
         
         

@@ -39,7 +39,7 @@
 
 -(void) medicatePatient:(Patient *)aPatient;
 
--(PrescriptionType) diagnosis: (Symptoms) symptom;
+-(PrescriptionType) diagnosis: (Symptoms *) symptom;
 
 -(NSMutableArray*) searchRecord:(Patient *)aPatient;
 

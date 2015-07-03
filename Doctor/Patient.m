@@ -12,15 +12,22 @@
 @implementation Patient
 
 
--(instancetype) init:(NSString *)some_name card:(BOOL)healthcard condition:(Symptoms *)symptom{
+-(instancetype) init:(NSString *)some_name condition:(Symptoms *)symptom{
     self = [super init];
     if (self) {
         // should we use underscore or '.'?
         self.name = some_name;
-        self.validHealthCard = &(healthcard);
         self.symptoms = symptom;
     }
     return self;
+}
+
+-(void) validate {
+    [self setValidHealthCard:YES];
+}
+
+-(void) inValidate {
+    [self setValidHealthCard:NO];
 }
 
 -(void) recieveQuestion:(NSString *)field {

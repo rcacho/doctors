@@ -15,6 +15,7 @@
     if (self) {
         self.name = some_name;
         self.patientList = [[NSMutableArray alloc] init];
+        self.record = [[PrescriptionRecord alloc] init];
     }
     return self;
 }
@@ -41,8 +42,8 @@
 }
 
 -(BOOL) auditPatient:(Patient *)aPatient {
-    if ([aPatient validHealthCard]) {
-        [self addPatient:aPatient];
+    if ([aPatient validHealthCard] == YES) {
+        [self addPatient:aPatient];        
         return true;
     } else {
         return false;
@@ -66,9 +67,9 @@
 
 -(void) medicatePatient:(Patient *)aPatient {
     if ([self isPatient:aPatient]) {
-        
         Symptoms *symptom = [aPatient symptoms];
-        PrescriptionType prescrip = [self diagnosis:*symptom];
+        
+        PrescriptionType prescrip = [self diagnosis:symptom];
         Prescription *prescription = [[Prescription alloc] init:aPatient type:prescrip];
         PrescriptionRecord *record = [self record];
         [record addPrescription:prescription];
@@ -78,23 +79,19 @@
     }
 }
 
--(PrescriptionType) diagnosis:(Symptoms)symptom {
-    switch (symptom) {
-        case paranoia:
-            return zyprexa;
-            break;
-        case hallucinations:
-            return clozapine;
-            break;
-        case depression:
-            return lithium;
-            break;
-        case mania:
-            return lithium;
-        default:
-            return zyprexa;
-            break;
+-(PrescriptionType) diagnosis:(Symptoms *)symptom {
+    if (symptom == paranoia) {
+        return zyprexa;
+    } else if (symptom == hallucinations) {
+        return clozapine;
+    } else if (symptom == depression) {
+        return lithium;
+    } else if (symptom == mania) {
+        return lithium;
+    } else {
+        return zyprexa;
     }
+
 }
 
 -(NSMutableArray*) searchRecord:(Patient *)aPatient {

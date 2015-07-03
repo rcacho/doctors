@@ -14,19 +14,23 @@ typedef enum Symptoms {
     paranoia, hallucinations, depression, mania,
 } Symptoms;
 
+typedef enum Validity {
+    Valid, notValid
+} Validity;
+
 @interface Patient : NSObject
 
 @property NSString *name;
 
 @property int *age;
 
-@property BOOL *validHealthCard;
+@property BOOL validHealthCard;
 
 @property Symptoms *symptoms;
 
 @property BOOL prescription;
 
--(instancetype) init: (NSString *)name card:(BOOL) healthcard condition:(Symptoms *) symptom;
+-(instancetype) init: (NSString *)name condition:(Symptoms *) symptom;
 
 -(void) recieveQuestion: (NSString *)field;
 
@@ -42,5 +46,8 @@ typedef enum Symptoms {
 
 -(void) takePrescription;
 
+-(void) validate;
+
+-(void) inValidate;
 
 @end
